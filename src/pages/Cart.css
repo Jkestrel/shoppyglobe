@@ -1,0 +1,24 @@
+.cart {
+  padding: 30px;
+}
+
+.cart h2 {
+  margin-bottom: 20px;
+}
+
+.checkout-btn {
+  padding: 10px 15px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.empty {
+  text-align: center;
+  margin-top: 50px;
+}
