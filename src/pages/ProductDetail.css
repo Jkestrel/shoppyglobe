@@ -1,0 +1,27 @@
+.detail {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.detail img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+.info {
+  max-width: 500px;
+}
+
+.info button {
+  padding: 10px 15px;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.info button:hover {
+  background-color: #15803d;
+}
