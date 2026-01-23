@@ -1,0 +1,14 @@
+.notfound {
+  text-align: center;
+  padding: 60px;
+}
+
+.notfound h1 {
+  font-size: 80px;
+}
+
+.notfound a {
+  display: inline-block;
+  margin-top: 20px;
+  color: #2563eb;
+}
