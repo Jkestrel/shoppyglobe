@@ -30,10 +30,10 @@ ShoppyGlobe is a basic e-commerce application built using **React + Vite**.
 ## 📦 Installation & Run
 
 
-git clone <GITHUB_REPO_LINK>
-cd shoppyglobe
-npm install
-npm run dev
+- git clone <GITHUB_REPO_LINK>
+- cd shoppyglobe
+- npm install
+- npm run dev
 
 
 ## Github Repo Link : https://github.com/Jkestrel/shoppyglobe
