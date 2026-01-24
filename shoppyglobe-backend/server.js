@@ -24,6 +24,19 @@ app.get("/", (req, res) => {
   res.send("ShoppyGlobe API running");
 });
 
+app.use((req, res, next) => {
+  const start = Date.now();
+
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    console.log(
+      `${req.method} ${req.originalUrl} → ${res.statusCode} (${duration}ms)`
+    );
+  });
+
+  next();
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`Server running on port ${PORT}`)
