@@ -1,0 +1,32 @@
+.auth {
+  max-width: 300px;
+  margin: 60px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.auth h2 {
+  text-align: center;
+}
+
+.auth form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth input {
+  padding: 8px;
+}
+
+.auth button {
+  background-color: #1e293b;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
