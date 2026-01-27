@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearch } from "../redux/cartSlice";
+import { logout } from "../redux/authSlice";
 import "./Header.css";
 
 function Header() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   return (
     <header className="header">
@@ -19,8 +21,19 @@ function Header() {
       />
 
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/cart">Cart ({cartItems.length})</Link>
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/cart">Cart ({cartItems.length})</Link>
+        </div>
+        <div>{token ? (
+          <button onClick={() => dispatch(logout())}>Logout</button>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
+        </div>
       </nav>
     </header>
   );

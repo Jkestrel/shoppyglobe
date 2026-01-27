@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
-import "./ProductDetail.css";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartAPI } from "../redux/cartSlice";
+import "./ProductDetail.css"; // ✅ CSS IMPORT
 
 function ProductDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.token);
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`);
+        const res = await fetch(`http://localhost:5000/products/${id}`);
         if (!res.ok) {
           throw new Error("Product not found");
         }
@@ -31,19 +34,38 @@ function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <h3 className="status">Loading product...</h3>;
-  if (error) return <h3 className="status error">{error}</h3>;
+  function handleAddToCart() {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+console.log(product);
+
+    dispatch(
+      addToCartAPI({
+        productId: product._id,
+        token,
+      })
+    );
+  }
+
+  if (loading) return <h3 className="pd-status">Loading...</h3>;
+  if (error) return <h3 className="pd-status error">{error}</h3>;
 
   return (
-    <div className="detail">
-      <img src={product.thumbnail} alt={product.title} />
+    <div className="product-detail">
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        className="product-image"
+      />
 
-      <div className="info">
+      <div className="product-info">
         <h2>{product.title}</h2>
         <p>{product.description}</p>
         <h3>₹{product.price}</h3>
 
-        <button onClick={() => dispatch(addToCart(product))}>
+        <button onClick={handleAddToCart}>
           Add to Cart
         </button>
       </div>

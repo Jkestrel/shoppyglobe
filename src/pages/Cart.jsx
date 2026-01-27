@@ -7,7 +7,7 @@ function Cart() {
   const items = useSelector((state) => state.cart.items);
 
   const total = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item?.product?.price * item?.quantity ,
     0
   );
 
@@ -20,7 +20,7 @@ function Cart() {
       <h2>Your Cart</h2>
 
       {items.map((item) => (
-        <CartItem key={item.id} item={item} />
+        <CartItem key={item.id} cartProduct={item} />
       ))}
 
       <h3>Total: ₹{total}</h3>

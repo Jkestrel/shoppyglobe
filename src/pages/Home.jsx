@@ -17,7 +17,7 @@ function Home() {
   return (
     <div className="product-grid">
       {filteredProducts.map((product) => (
-        <ProductItem key={product.id} product={product} />
+        <ProductItem key={product._id} product={product} />
       ))}
     </div>
   );

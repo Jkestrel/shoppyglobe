@@ -13,7 +13,7 @@ function ProductItem({ product }) {
       <h3>{product.title}</h3>
       <p>₹{product.price}</p>
 
-      <Link to={`/product/${product.id}`}>
+      <Link to={`/product/${product._id}`}>
         <button>View Details</button>
       </Link>
     </div>

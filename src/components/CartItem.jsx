@@ -1,36 +1,56 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  removeFromCart,
-  increaseQty,
-  decreaseQty,
+  removeFromCartAPI,
+  updateCartAPI
 } from "../redux/cartSlice";
 import "./CartItem.css";
 
-function CartItem({ item }) {
+function CartItem({ cartProduct ={} }) {
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+
+  const product = cartProduct?.product || {}
+  
 
   return (
-    <div className="cart-item">
-      <img src={item.thumbnail} alt={item.title} />
+    <div className="cart-product">
+      <img src={product.thumbnail} alt={product.title} />
 
       <div className="cart-info">
-        <h4>{item.title}</h4>
-        <p>₹{item.price}</p>
+        <h4>{product.title}</h4>
+        <p>₹{product.price}</p>
 
         <div className="qty-controls">
-          <button onClick={() => dispatch(decreaseQty(item.id))}>−</button>
-          <span>{item.quantity}</span>
-          <button onClick={() => dispatch(increaseQty(item.id))}>+</button>
+          <button onClick={() => {
+            if (cartProduct.quantity > 1) {
+              dispatch(
+                updateCartAPI({
+                  cartItemId: cartProduct._id,
+                  quantity: cartProduct.quantity - 1,
+                  token,
+                })
+              );
+            }
+          }}>−</button>
+          <span>{cartProduct.quantity}</span>
+          <button onClick={() => dispatch(
+            updateCartAPI({
+              cartItemId: cartProduct._id,
+              quantity: cartProduct.quantity + 1,
+              token,
+            })
+          )
+          }>+</button>
         </div>
 
         <button
           className="remove"
-          onClick={() => dispatch(removeFromCart(item.id))}
+          onClick={() => dispatch(removeFromCartAPI({cartItemId: cartProduct._id, token}))}
         >
           Remove
         </button>
       </div>
-    </div>
+    </div >
   );
 }
 

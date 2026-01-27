@@ -8,12 +8,12 @@ function useProducts() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch("https://dummyjson.com/products");
+        const res = await fetch("http://localhost:5000/products");
         if (!res.ok) {
           throw new Error("Failed to fetch products");
         }
         const data = await res.json();
-        setProducts(data.products);
+        setProducts(data);
       } catch (err) {
         setError(err.message);
       } finally {
